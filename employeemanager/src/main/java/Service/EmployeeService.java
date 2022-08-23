@@ -1,5 +1,6 @@
 package Service;
 
+import Exceptions.UserNotFoundException;
 import model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,9 +33,9 @@ public class EmployeeService {
     }
 
     public Employee findEmployeeById(Long id) {
-        return employeeRepo.findById(id).orElseThrow(
-                () -> new IllegalStateException(
-                        "User " + id + " was not found"
+        return employeeRepo.findEmployeeById(id).orElseThrow(
+                () -> new UserNotFoundException(
+                        "User by id " + id + " was not found"
                 )
         );
     }
